@@ -25,12 +25,15 @@ public class PlayPoker {
                 }
                 if (blackNumber.get(i) < whiteNumber.get(i)) {
                     winner = "White";
-                    explanation =numberToCharacter(whiteNumber.get(i));
+                    explanation = numberToCharacter(whiteNumber.get(i));
                     break;
                 }
                 if (blackNumber.get(i) == whiteNumber.get(i)) {
                     blackNumber.remove(i);
                     whiteNumber.remove(i);
+                    if (blackNumber.size() == 0) {
+                        return "Tie.";
+                    }
                 }
             }
         }

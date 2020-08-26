@@ -17,7 +17,7 @@ public class PlayPoker {
             type = whiteResult.get(1);
             List<Integer> blackNumber = ExtractNumber(black);
             List<Integer> whiteNumber = ExtractNumber(white);
-            for (int i = blackNumber.size() - 1; i > 0; i--) {
+            for (int i = blackNumber.size()-1; i >= 0; i--) {
                 if (blackNumber.get(i) > whiteNumber.get(i)) {
                     winner = "Black";
                     explanation = numberToCharacter(blackNumber.get(i));

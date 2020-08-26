@@ -15,11 +15,23 @@ public class PlayPoker {
         String explanation = "";
         if (blackLevel == whiteLevel && blackResult.get(0).equals("1")) {
             type = whiteResult.get(1);
-            Integer maxWhite = Integer.parseInt(whiteResult.get(3));
-            Integer maxBlack = Integer.parseInt(blackResult.get(3));
-            if (maxWhite > maxBlack) {
-                winner = "White";
-                explanation = whiteResult.get(2);
+            List<Integer> blackNumber = ExtractNumber(black);
+            List<Integer> whiteNumber = ExtractNumber(white);
+            for (int i = blackNumber.size() - 1; i > 0; i--) {
+                if (blackNumber.get(i) > whiteNumber.get(i)) {
+                    winner = "Black";
+                    explanation = numberToCharacter(blackNumber.get(i));
+                    break;
+                }
+                if (blackNumber.get(i) < whiteNumber.get(i)) {
+                    winner = "White";
+                    explanation =numberToCharacter(whiteNumber.get(i));
+                    break;
+                }
+                if (blackNumber.get(i) == whiteNumber.get(i)) {
+                    blackNumber.remove(i);
+                    whiteNumber.remove(i);
+                }
             }
         }
         if (blackLevel > whiteLevel) {
@@ -47,26 +59,22 @@ public class PlayPoker {
         if (isStraight && isFlush) {
             result.add(0, "9");
             result.add(1, "straight flush");
-            result.add(2, explanation);
         } else if (type.equals("4")) {
             result.add(0, "7");
             result.add(1, "full house");
-            result.add(2, explanation);
         } else if (!isStraight && isFlush) {
             result.add(0, "6");
             result.add(1, "flush");
-            result.add(2, explanation);
         } else if (isStraight && !isFlush) {
             result.add(0, "5");
             result.add(1, "straight");
-            result.add(2, explanation);
         } else {
             result.add(0, "1");
             result.add(1, "high card");
             explanation = numberToCharacter(pokersNumber.get(4));
-            result.add(2, explanation);
-            result.add(3, String.valueOf(pokersNumber.get(4)));
+
         }
+        result.add(2, explanation);
 
         return result;
     }

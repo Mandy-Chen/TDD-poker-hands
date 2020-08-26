@@ -36,4 +36,17 @@ public class PokerTest {
         //then
         assertThat(result).isEqualTo("Black wins. -with full house : 4 over 2");
     }
+    @Test
+    void should_return_Black_wins_with_high_card_house_when_play_poker_given_Black_2H3D5S9CKD_White_2C3H4S8CKH() {
+        //given
+        List<String> black = Arrays.asList("2H", "3D", "5S", "9C", "KH");
+        List<String> white = Arrays.asList("2C", "3H", "4S", "8C", "KH");
+
+        //when
+        PlayPoker playPoker = new PlayPoker();
+        String result = playPoker.play(black, white);
+
+        //then
+        assertThat(result).isEqualTo("Black wins. -with high card : 9");
+    }
 }
